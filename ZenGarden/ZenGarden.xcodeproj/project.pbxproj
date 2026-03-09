@@ -1,0 +1,473 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA000001 /* ZenGardenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000101 /* ZenGardenApp.swift */; };
+		AA000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000102 /* ContentView.swift */; };
+		AA000003 /* ZenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000103 /* ZenStore.swift */; };
+		AA000004 /* ZenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000104 /* ZenModels.swift */; };
+		AA000011 /* ZenGardenWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000111 /* ZenGardenWatchApp.swift */; };
+		AA000012 /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000112 /* WatchContentView.swift */; };
+		AA000013 /* WatchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000113 /* WatchStore.swift */; };
+		AA000014 /* ZenModels.swift in Watch Sources */ = {isa = PBXBuildFile; fileRef = AA000104 /* ZenModels.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA000101 /* ZenGardenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenGardenApp.swift; sourceTree = "<group>"; };
+		AA000102 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA000103 /* ZenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenStore.swift; sourceTree = "<group>"; };
+		AA000104 /* ZenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenModels.swift; sourceTree = "<group>"; };
+		AA000111 /* ZenGardenWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenGardenWatchApp.swift; sourceTree = "<group>"; };
+		AA000112 /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
+		AA000113 /* WatchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchStore.swift; sourceTree = "<group>"; };
+		AA000201 /* ZenGarden.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenGarden.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA000202 /* ZenGardenWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenGardenWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		AA000300 /* ZenGarden */ = {
+			isa = PBXGroup;
+			children = (
+				AA000301 /* ZenGarden */,
+				AA000302 /* ZenGardenWatch */,
+				AA000303 /* Shared */,
+				AA000304 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA000301 /* ZenGarden */ = {
+			isa = PBXGroup;
+			children = (
+				AA000101 /* ZenGardenApp.swift */,
+				AA000305 /* Views */,
+				AA000306 /* ViewModels */,
+			);
+			path = ZenGarden/Sources;
+			sourceTree = "<group>";
+		};
+		AA000302 /* ZenGardenWatch */ = {
+			isa = PBXGroup;
+			children = (
+				AA000111 /* ZenGardenWatchApp.swift */,
+				AA000307 /* Watch Views */,
+				AA000308 /* Watch ViewModels */,
+			);
+			path = ZenGardenWatch/Sources;
+			sourceTree = "<group>";
+		};
+		AA000303 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AA000104 /* ZenModels.swift */,
+			);
+			path = Shared/Sources;
+			sourceTree = "<group>";
+		};
+		AA000304 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA000201 /* ZenGarden.app */,
+				AA000202 /* ZenGardenWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA000305 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA000102 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA000306 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AA000103 /* ZenStore.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AA000307 /* Watch Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA000112 /* WatchContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA000308 /* Watch ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AA000113 /* WatchStore.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA000401 /* ZenGarden */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA000501 /* Build configuration list for PBXNativeTarget "ZenGarden" */;
+			buildPhases = (
+				AA000601 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZenGarden;
+			productName = ZenGarden;
+			productReference = AA000201 /* ZenGarden.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA000402 /* ZenGardenWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA000502 /* Build configuration list for PBXNativeTarget "ZenGardenWatch" */;
+			buildPhases = (
+				AA000602 /* Watch Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZenGardenWatch;
+			productName = ZenGardenWatch;
+			productReference = AA000202 /* ZenGardenWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA000700 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					AA000401 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					AA000402 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AA000700 /* Build configuration list for PBXProject "ZenGarden" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = zh_CN;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = AA000300 /* ZenGarden */;
+			productRefGroup = AA000304 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA000401 /* ZenGarden */,
+				AA000402 /* ZenGardenWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA000601 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000001 /* ZenGardenApp.swift in Sources */,
+				AA000002 /* ContentView.swift in Sources */,
+				AA000003 /* ZenStore.swift in Sources */,
+				AA000004 /* ZenModels.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA000602 /* Watch Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000011 /* ZenGardenWatchApp.swift in Sources */,
+				AA000012 /* WatchContentView.swift in Sources */,
+				AA000013 /* WatchStore.swift in Sources */,
+				AA000014 /* ZenModels.swift in Watch Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA000801 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA000802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA000811 /* Debug iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ZenGarden/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "禅定花园";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zengarden.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA000812 /* Release iOS */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ZenGarden/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "禅定花园";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zengarden.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA000821 /* Debug Watch */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ZenGardenWatch/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "禅定花园";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.zengarden.ios";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zengarden.watch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		AA000822 /* Release Watch */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ZenGardenWatch/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "禅定花园";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.zengarden.ios";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zengarden.watch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA000700 /* Build configuration list for PBXProject "ZenGarden" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000801 /* Debug */,
+				AA000802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000501 /* Build configuration list for PBXNativeTarget "ZenGarden" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000811 /* Debug iOS */,
+				AA000812 /* Release iOS */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000502 /* Build configuration list for PBXNativeTarget "ZenGardenWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000821 /* Debug Watch */,
+				AA000822 /* Release Watch */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = AA000700 /* Project object */;
+}
