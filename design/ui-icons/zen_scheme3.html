@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c0818;
+    font-family: 'PingFang SC', 'Noto Serif SC', serif;
+    width: 1200px;
+    padding: 60px 40px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .scheme-tag {
+    display: inline-block;
+    border: 1px solid rgba(180,140,220,0.35);
+    color: #6b5a8e;
+    font-size: 11px;
+    letter-spacing: 5px;
+    padding: 6px 20px;
+    margin-bottom: 20px;
+  }
+  .scheme-title {
+    font-size: 48px;
+    color: #c4a8e8;
+    letter-spacing: 16px;
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+  .scheme-subtitle {
+    color: #6b5a8e;
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+  .main-content {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+  }
+  .icons-section { flex: 1; }
+  .icons-title {
+    color: #6b5a8e;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(180,140,220,0.2);
+  }
+  .icons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .icon-showcase {
+    background: rgba(18,10,32,0.9);
+    border: 1px solid rgba(180,140,220,0.2);
+    border-radius: 20px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .icon-showcase.active {
+    background: rgba(232,200,106,0.06);
+    border-color: rgba(232,200,106,0.4);
+    box-shadow: 0 0 30px rgba(232,200,106,0.08);
+  }
+  .icon-name { font-size: 16px; letter-spacing: 3px; }
+  .icon-state { font-size: 11px; letter-spacing: 2px; opacity: 0.6; }
+  .phone-section { width: 320px; flex-shrink: 0; }
+  .phone-label {
+    color: #6b5a8e;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .phone-mockup {
+    width: 300px;
+    margin: 0 auto;
+    background: #111;
+    border-radius: 44px;
+    padding: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 0 1px rgba(180,140,220,0.08);
+  }
+  .phone-screen {
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    height: 560px;
+  }
+  .colors-section { margin-top: 40px; }
+  .colors-title {
+    color: #6b5a8e;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+  .color-chips { display: flex; gap: 16px; flex-wrap: wrap; }
+  .color-chip { display: flex; align-items: center; gap: 10px; }
+  .chip-dot { width: 28px; height: 28px; border-radius: 50%; }
+  .chip-info { display: flex; flex-direction: column; gap: 2px; }
+  .chip-name { font-size: 12px; color: #8b7aae; letter-spacing: 1px; }
+  .chip-hex { font-size: 10px; color: #5a4a7e; letter-spacing: 1px; }
+  .desc-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(180,140,220,0.12);
+  }
+  .desc-title {
+    color: #6b5a8e;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+  }
+  .desc-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  .desc-item {
+    padding: 20px;
+    background: rgba(18,10,32,0.8);
+    border: 1px solid rgba(180,140,220,0.15);
+    border-radius: 12px;
+  }
+  .desc-icon-name { font-size: 14px; color: #e8c86a; letter-spacing: 2px; margin-bottom: 8px; }
+  .desc-text { font-size: 12px; color: #5a4a7e; letter-spacing: 1px; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="scheme-tag">SCHEME · 03</div>
+  <div class="scheme-title">莲 花 佛 光</div>
+  <div class="scheme-subtitle">莲花纹样 · 深紫金色 · 神圣庄严</div>
+</div>
+
+<div class="main-content">
+  <div class="icons-section">
+    <div class="icons-title">图标设计 · ICON DESIGN</div>
+    <div class="icons-grid">
+
+      <!-- 禅堂 激活 -->
+      <div class="icon-showcase active">
+        <svg width="120" height="120" viewBox="0 0 44 44" fill="none">
+          <!-- 莲花禅堂：金色线条 神圣感 -->
+          <!-- 光晕 -->
+          <circle cx="22" cy="20" r="18" fill="rgba(232,200,106,0.04)"/>
+          <!-- 屋顶 -->
+          <path d="M22 6 L38 19 L6 19 Z" stroke="#e8c86a" stroke-width="1.6" fill="rgba(232,200,106,0.1)" stroke-linejoin="round"/>
+          <!-- 屋脊宝珠 -->
+          <circle cx="22" cy="6" r="2.5" fill="#e8c86a"/>
+          <!-- 宝珠光芒 -->
+          <path d="M20 6 Q22 3.5 24 6" stroke="#e8c86a" stroke-width="0.8" fill="rgba(232,200,106,0.25)"/>
+          <!-- 翘角装饰 -->
+          <path d="M6 19 L3.5 16.5 L5 19" stroke="#e8c86a" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+          <path d="M38 19 L40.5 16.5 L39 19" stroke="#e8c86a" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+          <!-- 墙体 -->
+          <rect x="10" y="19" width="24" height="14" stroke="#e8c86a" stroke-width="1.6" fill="rgba(232,200,106,0.04)"/>
+          <!-- 莲花拱门 -->
+          <path d="M17 33 L17 26.5 Q22 22 27 26.5 L27 33" stroke="#e8c86a" stroke-width="1.6" fill="rgba(232,200,106,0.12)"/>
+          <!-- 莲花瓣弧线 -->
+          <path d="M17 26.5 Q19.5 23.5 22 26.5" stroke="#e8c86a" stroke-width="0.8" fill="rgba(232,200,106,0.15)"/>
+          <path d="M22 26.5 Q24.5 23.5 27 26.5" stroke="#e8c86a" stroke-width="0.8" fill="rgba(232,200,106,0.15)"/>
+          <!-- 台阶 -->
+          <line x1="7" y1="33" x2="37" y2="33" stroke="#e8c86a" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="9" y1="36" x2="35" y2="36" stroke="#e8c86a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+        <div class="icon-name" style="color:#e8c86a;">禅堂</div>
+        <div class="icon-state" style="color:#a89060;">激活状态 · ACTIVE</div>
+      </div>
+
+      <!-- 佛珠 默认 -->
+      <div class="icon-showcase">
+        <svg width="120" height="120" viewBox="0 0 44 44" fill="none">
+          <!-- 莲花佛珠：珠子+莲花中心 -->
+          <circle cx="22" cy="22" r="13.5" stroke="#4a3860" stroke-width="1" fill="none" opacity="0.5"/>
+          <!-- 珠子带光泽 -->
+          <circle cx="22" cy="8.5" r="3.2" fill="#6b5a8e"/>
+          <ellipse cx="21" cy="7.8" rx="1.2" ry="0.8" fill="rgba(196,168,232,0.5)"/>
+          <circle cx="32.5" cy="13.5" r="2.7" fill="#6b5a8e" opacity="0.85"/>
+          <circle cx="35.5" cy="22" r="2.7" fill="#6b5a8e" opacity="0.85"/>
+          <circle cx="32.5" cy="30.5" r="2.7" fill="#6b5a8e" opacity="0.85"/>
+          <circle cx="22" cy="35.5" r="3.2" fill="#6b5a8e"/>
+          <circle cx="11.5" cy="30.5" r="2.7" fill="#6b5a8e" opacity="0.85"/>
+          <circle cx="8.5" cy="22" r="2.7" fill="#6b5a8e" opacity="0.85"/>
+          <circle cx="11.5" cy="13.5" r="2.7" fill="#6b5a8e" opacity="0.85"/>
+          <!-- 莲花四瓣 -->
+          <path d="M22 17.5 Q24.5 19.5 22 22 Q19.5 19.5 22 17.5 Z" fill="#e8c86a" opacity="0.75"/>
+          <path d="M26.5 22 Q24.5 24.5 22 22 Q24.5 19.5 26.5 22 Z" fill="#e8c86a" opacity="0.75"/>
+          <path d="M22 26.5 Q19.5 24.5 22 22 Q24.5 24.5 22 26.5 Z" fill="#e8c86a" opacity="0.75"/>
+          <path d="M17.5 22 Q19.5 19.5 22 22 Q19.5 24.5 17.5 22 Z" fill="#e8c86a" opacity="0.75"/>
+          <circle cx="22" cy="22" r="1.8" fill="#e8c86a"/>
+          <!-- 流苏 -->
+          <line x1="22" y1="38.7" x2="22" y2="42.5" stroke="#6b5a8e" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="20" y1="40.5" x2="19" y2="44" stroke="#6b5a8e" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+          <line x1="24" y1="40.5" x2="25" y2="44" stroke="#6b5a8e" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+        <div class="icon-name" style="color:#6b5a8e;">佛珠</div>
+        <div class="icon-state" style="color:#4a3860;">默认状态 · DEFAULT</div>
+      </div>
+
+      <!-- 图鉴 默认 -->
+      <div class="icon-showcase">
+        <svg width="120" height="120" viewBox="0 0 44 44" fill="none">
+          <!-- 莲花图鉴：经书+莲花纹 -->
+          <!-- 经书主体 -->
+          <rect x="10" y="10" width="24" height="26" rx="2.5" stroke="#6b5a8e" stroke-width="1.5" fill="rgba(107,90,142,0.05)"/>
+          <!-- 上下装饰条 -->
+          <rect x="7" y="8" width="30" height="3.5" rx="1.5" stroke="#6b5a8e" stroke-width="1.2" fill="rgba(107,90,142,0.15)"/>
+          <rect x="7" y="34.5" width="30" height="3.5" rx="1.5" stroke="#6b5a8e" stroke-width="1.2" fill="rgba(107,90,142,0.15)"/>
+          <!-- 莲花纹样 -->
+          <path d="M22 15.5 Q25 18 22 22 Q19 18 22 15.5 Z" stroke="#6b5a8e" stroke-width="1" fill="rgba(107,90,142,0.2)"/>
+          <path d="M15.5 22 Q18 19 22 22 Q18 25 15.5 22 Z" stroke="#6b5a8e" stroke-width="1" fill="rgba(107,90,142,0.2)"/>
+          <path d="M28.5 22 Q26 19 22 22 Q26 25 28.5 22 Z" stroke="#6b5a8e" stroke-width="1" fill="rgba(107,90,142,0.2)"/>
+          <path d="M22 28.5 Q19 26 22 22 Q25 26 22 28.5 Z" stroke="#6b5a8e" stroke-width="1" fill="rgba(107,90,142,0.2)"/>
+          <!-- 金色中心 -->
+          <circle cx="22" cy="22" r="2.2" fill="#e8c86a" opacity="0.7"/>
+          <!-- 底部文字线 -->
+          <line x1="13" y1="31" x2="31" y2="31" stroke="#6b5a8e" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
+        </svg>
+        <div class="icon-name" style="color:#6b5a8e;">图鉴</div>
+        <div class="icon-state" style="color:#4a3860;">默认状态 · DEFAULT</div>
+      </div>
+
+      <!-- 统计 默认 -->
+      <div class="icon-showcase">
+        <svg width="120" height="120" viewBox="0 0 44 44" fill="none">
+          <!-- 莲花统计：法轮 -->
+          <!-- 外圆 -->
+          <circle cx="22" cy="22" r="16" stroke="#6b5a8e" stroke-width="1.2" fill="none" opacity="0.5"/>
+          <!-- 法轮辐条 8根 -->
+          <line x1="22" y1="6" x2="22" y2="38" stroke="#4a3860" stroke-width="0.8" opacity="0.5"/>
+          <line x1="6" y1="22" x2="38" y2="22" stroke="#4a3860" stroke-width="0.8" opacity="0.5"/>
+          <line x1="10.7" y1="10.7" x2="33.3" y2="33.3" stroke="#4a3860" stroke-width="0.8" opacity="0.5"/>
+          <line x1="33.3" y1="10.7" x2="10.7" y2="33.3" stroke="#4a3860" stroke-width="0.8" opacity="0.5"/>
+          <!-- 内圆 -->
+          <circle cx="22" cy="22" r="9" stroke="#6b5a8e" stroke-width="1.5" fill="rgba(107,90,142,0.08)"/>
+          <!-- 莲花四瓣 -->
+          <path d="M22 15 Q25 18.5 22 22 Q19 18.5 22 15 Z" fill="#e8c86a" opacity="0.65"/>
+          <path d="M29 22 Q25.5 25 22 22 Q25.5 19 29 22 Z" fill="#e8c86a" opacity="0.65"/>
+          <path d="M22 29 Q19 25.5 22 22 Q25 25.5 22 29 Z" fill="#e8c86a" opacity="0.65"/>
+          <path d="M15 22 Q18.5 19 22 22 Q18.5 25 15 22 Z" fill="#e8c86a" opacity="0.65"/>
+          <!-- 中心 -->
+          <circle cx="22" cy="22" r="3" fill="#e8c86a"/>
+          <!-- 外圈点 -->
+          <circle cx="22" cy="6" r="1.5" fill="#6b5a8e" opacity="0.6"/>
+          <circle cx="38" cy="22" r="1.5" fill="#6b5a8e" opacity="0.6"/>
+          <circle cx="22" cy="38" r="1.5" fill="#6b5a8e" opacity="0.6"/>
+          <circle cx="6" cy="22" r="1.5" fill="#6b5a8e" opacity="0.6"/>
+        </svg>
+        <div class="icon-name" style="color:#6b5a8e;">统计</div>
+        <div class="icon-state" style="color:#4a3860;">默认状态 · DEFAULT</div>
+      </div>
+    </div>
+
+    <!-- 色彩说明 -->
+    <div class="colors-section">
+      <div class="colors-title">配色方案 · COLOR PALETTE</div>
+      <div class="color-chips">
+        <div class="color-chip">
+          <div class="chip-dot" style="background:#e8c86a;"></div>
+          <div class="chip-info">
+            <div class="chip-name">佛光金</div>
+            <div class="chip-hex">#E8C86A</div>
+          </div>
+        </div>
+        <div class="color-chip">
+          <div class="chip-dot" style="background:#c4a8e8;"></div>
+          <div class="chip-info">
+            <div class="chip-name">莲花紫</div>
+            <div class="chip-hex">#C4A8E8</div>
+          </div>
+        </div>
+        <div class="color-chip">
+          <div class="chip-dot" style="background:#6b5a8e;"></div>
+          <div class="chip-info">
+            <div class="chip-name">深紫色</div>
+            <div class="chip-hex">#6B5A8E</div>
+          </div>
+        </div>
+        <div class="color-chip">
+          <div class="chip-dot" style="background:#0c0818;border:1px solid rgba(180,140,220,0.3);"></div>
+          <div class="chip-info">
+            <div class="chip-name">夜紫底</div>
+            <div class="chip-hex">#0C0818</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 设计说明 -->
+    <div class="desc-section">
+      <div class="desc-title">图标寓意 · ICON MEANING</div>
+      <div class="desc-items">
+        <div class="desc-item">
+          <div class="desc-icon-name">禅堂</div>
+          <div class="desc-text">金色飞檐殿堂，宝珠光芒，莲花拱门，双层台阶，佛光普照</div>
+        </div>
+        <div class="desc-item">
+          <div class="desc-icon-name">佛珠</div>
+          <div class="desc-text">紫色串珠，莲花四瓣中心，金色莲心，三股流苏，庄严神圣</div>
+        </div>
+        <div class="desc-item">
+          <div class="desc-icon-name">图鉴</div>
+          <div class="desc-text">经书造型，莲花纹样装饰，金色中心，记录修行智慧与感悟</div>
+        </div>
+        <div class="desc-item">
+          <div class="desc-icon-name">统计</div>
+          <div class="desc-text">佛教法轮图案，八辐象征八正道，莲花中心，金色佛光点睛</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 手机展示 -->
+  <div class="phone-section">
+    <div class="phone-label">实机效果 · PREVIEW</div>
+    <div class="phone-mockup">
+      <div class="phone-screen">
+        <svg style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 276 560" fill="none">
+          <defs>
+            <radialGradient id="bg3" cx="50%" cy="35%" r="55%">
+              <stop offset="0%" stop-color="#3d2e1a"/>
+              <stop offset="100%" stop-color="#080604"/>
+            </radialGradient>
+          </defs>
+          <rect width="276" height="560" fill="url(#bg3)"/>
+          <path d="M138 0 L0 90" stroke="#1a1208" stroke-width="14" opacity="0.9"/>
+          <path d="M138 0 L276 90" stroke="#1a1208" stroke-width="14" opacity="0.9"/>
+          <line x1="0" y1="55" x2="276" y2="55" stroke="#1a1208" stroke-width="8" opacity="0.7"/>
+          <ellipse cx="138" cy="290" rx="28" ry="38" fill="#b8922a" opacity="0.55"/>
+          <circle cx="138" cy="255" r="17" fill="#c9a96e" opacity="0.65"/>
+          <rect x="85" y="330" width="106" height="7" rx="2" fill="#4a3218" opacity="0.85"/>
+          <ellipse cx="90" cy="420" rx="24" ry="7" fill="#2a2018" opacity="0.7"/>
+          <ellipse cx="186" cy="420" rx="24" ry="7" fill="#2a2018" opacity="0.7"/>
+          <rect x="0" y="448" width="276" height="28" fill="rgba(0,0,0,0.55)"/>
+          <text x="16" y="466" font-size="10" fill="#c9a96e" font-family="serif">Lv.3  石基木屋</text>
+          <text x="180" y="466" font-size="9" fill="#6b5a42" font-family="serif">根基稳固</text>
+        </svg>
+
+        <!-- 导航栏 方案三 -->
+        <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(8,5,18,0.99) 0%,rgba(14,8,28,0.96) 100%);border-top:1px solid rgba(180,140,220,0.25);display:flex;justify-content:space-around;align-items:center;padding:10px 0 18px;">
+          <!-- 禅堂 激活 -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:46px;height:46px;background:radial-gradient(circle,rgba(232,200,106,0.22) 0%,rgba(232,200,106,0.05) 60%,transparent 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+              <svg width="30" height="30" viewBox="0 0 44 44" fill="none">
+                <path d="M22 6 L38 19 L6 19 Z" stroke="#e8c86a" stroke-width="1.8" fill="rgba(232,200,106,0.12)" stroke-linejoin="round"/>
+                <circle cx="22" cy="6" r="2.5" fill="#e8c86a"/>
+                <rect x="10" y="19" width="24" height="14" stroke="#e8c86a" stroke-width="1.8" fill="rgba(232,200,106,0.05)"/>
+                <path d="M17 33 L17 26.5 Q22 22 27 26.5 L27 33" stroke="#e8c86a" stroke-width="1.8" fill="rgba(232,200,106,0.15)"/>
+                <line x1="7" y1="33" x2="37" y2="33" stroke="#e8c86a" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span style="font-size:10px;color:#e8c86a;letter-spacing:1px;">禅堂</span>
+          </div>
+          <!-- 佛珠 -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;">
+              <svg width="30" height="30" viewBox="0 0 44 44" fill="none">
+                <circle cx="22" cy="22" r="13.5" stroke="#2e2248" stroke-width="1" fill="none"/>
+                <circle cx="22" cy="8.5" r="3.2" fill="#3a2a58"/>
+                <circle cx="32.5" cy="13.5" r="2.7" fill="#3a2a58"/>
+                <circle cx="35.5" cy="22" r="2.7" fill="#3a2a58"/>
+                <circle cx="32.5" cy="30.5" r="2.7" fill="#3a2a58"/>
+                <circle cx="22" cy="35.5" r="3.2" fill="#3a2a58"/>
+                <circle cx="11.5" cy="30.5" r="2.7" fill="#3a2a58"/>
+                <circle cx="8.5" cy="22" r="2.7" fill="#3a2a58"/>
+                <circle cx="11.5" cy="13.5" r="2.7" fill="#3a2a58"/>
+                <path d="M22 19 Q24 20.5 22 22 Q20 20.5 22 19 Z" fill="#4a3860" opacity="0.6"/>
+                <path d="M25 22 Q23.5 24 22 22 Q23.5 20 25 22 Z" fill="#4a3860" opacity="0.6"/>
+                <path d="M22 25 Q20 23.5 22 22 Q24 23.5 22 25 Z" fill="#4a3860" opacity="0.6"/>
+                <path d="M19 22 Q20.5 20 22 22 Q20.5 24 19 22 Z" fill="#4a3860" opacity="0.6"/>
+                <circle cx="22" cy="22" r="1.5" fill="#4a3860"/>
+                <line x1="22" y1="38.7" x2="22" y2="42.5" stroke="#3a2a58" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span style="font-size:10px;color:#3a2a58;letter-spacing:1px;">佛珠</span>
+          </div>
+          <!-- 图鉴 -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;">
+              <svg width="30" height="30" viewBox="0 0 44 44" fill="none">
+                <rect x="10" y="10" width="24" height="26" rx="2.5" stroke="#3a2a58" stroke-width="1.5" fill="none"/>
+                <rect x="7" y="8" width="30" height="3.5" rx="1.5" stroke="#3a2a58" stroke-width="1.2" fill="rgba(58,42,88,0.2)"/>
+                <rect x="7" y="34.5" width="30" height="3.5" rx="1.5" stroke="#3a2a58" stroke-width="1.2" fill="rgba(58,42,88,0.2)"/>
+                <path d="M22 15.5 Q25 18 22 22 Q19 18 22 15.5 Z" stroke="#3a2a58" stroke-width="1" fill="rgba(58,42,88,0.3)"/>
+                <path d="M15.5 22 Q18 19 22 22 Q18 25 15.5 22 Z" stroke="#3a2a58" stroke-width="1" fill="rgba(58,42,88,0.3)"/>
+                <path d="M28.5 22 Q26 19 22 22 Q26 25 28.5 22 Z" stroke="#3a2a58" stroke-width="1" fill="rgba(58,42,88,0.3)"/>
+                <path d="M22 28.5 Q19 26 22 22 Q25 26 22 28.5 Z" stroke="#3a2a58" stroke-width="1" fill="rgba(58,42,88,0.3)"/>
+                <circle cx="22" cy="22" r="2" fill="#3a2a58" opacity="0.6"/>
+              </svg>
+            </div>
+            <span style="font-size:10px;color:#3a2a58;letter-spacing:1px;">图鉴</span>
+          </div>
+          <!-- 统计 -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+            <div style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;">
+              <svg width="30" height="30" viewBox="0 0 44 44" fill="none">
+                <circle cx="22" cy="22" r="16" stroke="#3a2a58" stroke-width="1.2" fill="none"/>
+                <line x1="22" y1="6" x2="22" y2="38" stroke="#2e2248" stroke-width="0.8" opacity="0.5"/>
+                <line x1="6" y1="22" x2="38" y2="22" stroke="#2e2248" stroke-width="0.8" opacity="0.5"/>
+                <line x1="10.7" y1="10.7" x2="33.3" y2="33.3" stroke="#2e2248" stroke-width="0.8" opacity="0.5"/>
+                <line x1="33.3" y1="10.7" x2="10.7" y2="33.3" stroke="#2e2248" stroke-width="0.8" opacity="0.5"/>
+                <circle cx="22" cy="22" r="9" stroke="#3a2a58" stroke-width="1.5" fill="none"/>
+                <path d="M22 15 Q25 18.5 22 22 Q19 18.5 22 15 Z" fill="#3a2a58" opacity="0.5"/>
+                <path d="M29 22 Q25.5 25 22 22 Q25.5 19 29 22 Z" fill="#3a2a58" opacity="0.5"/>
+                <path d="M22 29 Q19 25.5 22 22 Q25 25.5 22 29 Z" fill="#3a2a58" opacity="0.5"/>
+                <path d="M15 22 Q18.5 19 22 22 Q18.5 25 15 22 Z" fill="#3a2a58" opacity="0.5"/>
+                <circle cx="22" cy="22" r="2.5" fill="#3a2a58"/>
+              </svg>
+            </div>
+            <span style="font-size:10px;color:#3a2a58;letter-spacing:1px;">统计</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
