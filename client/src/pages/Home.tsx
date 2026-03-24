@@ -1,453 +1,261 @@
 /**
- * 禅定花园 · 主页面
- * 双端模拟器展示：iPhone + Apple Watch
- * Design Philosophy: 金碧禅境 - 夜空深蓝为底，金箔色系为魂
+ * 水浒传：梁山风云录 - 主页面
+ * Design: 水墨江湖·沉浸叙事
+ * Layout: 响应式双端展示 - 左侧iPhone，右侧Apple Watch
  */
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ZenProvider } from '@/contexts/ZenContext';
-import PhoneApp from '@/components/PhoneApp';
-import WatchApp from '@/components/WatchApp';
-import { ZEN_LEVELS, formatMerit } from '@/lib/zenStore';
+import { useState } from 'react';
+import { GameProvider } from '@/contexts/GameContext';
+import IPhoneFrame from '@/components/iphone/IPhoneFrame';
+import WatchSimulator from '@/components/watch/WatchSimulator';
 
-type DeviceView = 'both' | 'phone' | 'watch';
+const HERO_BANNER = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663379255449/RUixAFWpWkwbNMtYmRxaaK/hero-banner-ZEkhA7PFcZuR8z2zqWU2Ub.webp';
 
-// 设备框架组件
-function PhoneFrame({ children }: { children: React.ReactNode }) {
+type ViewMode = 'both' | 'iphone' | 'watch';
+
+function AppHeader({ viewMode, setViewMode }: { viewMode: ViewMode; setViewMode: (v: ViewMode) => void }) {
   return (
-    <div className="relative phone-frame" style={{ width: 320, height: 640 }}>
-      {/* 刘海 */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 z-20"
-        style={{
-          width: 120,
-          height: 28,
-          background: '#1a1a1a',
-          borderRadius: '0 0 16px 16px',
-        }}
-      >
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{ width: 10, height: 10, background: '#0a0a0a' }}
-        />
-      </div>
-      {/* 屏幕内容 */}
-      <div
-        className="absolute overflow-hidden"
-        style={{
-          top: 10,
-          left: 8,
-          right: 8,
-          bottom: 10,
-          borderRadius: 32,
-          background: '#030308',
-        }}
-      >
-        {children}
-      </div>
-      {/* 侧边按钮 */}
-      <div
-        className="absolute right-0 rounded-r-sm"
-        style={{ top: 120, width: 3, height: 50, background: '#2a2a2a' }}
-      />
-      <div
-        className="absolute left-0 rounded-l-sm"
-        style={{ top: 100, width: 3, height: 35, background: '#2a2a2a' }}
-      />
-      <div
-        className="absolute left-0 rounded-l-sm"
-        style={{ top: 145, width: 3, height: 35, background: '#2a2a2a' }}
-      />
-    </div>
-  );
-}
-
-function WatchFrame({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative" style={{ width: 180, height: 220 }}>
-      {/* 表带 */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2"
-        style={{
-          top: -30,
-          width: 70,
-          height: 40,
-          background: 'linear-gradient(180deg, #1a1a1a, #2a2a2a)',
-          borderRadius: '8px 8px 0 0',
-        }}
-      />
-      <div
-        className="absolute left-1/2 -translate-x-1/2"
-        style={{
-          bottom: -30,
-          width: 70,
-          height: 40,
-          background: 'linear-gradient(0deg, #1a1a1a, #2a2a2a)',
-          borderRadius: '0 0 8px 8px',
-        }}
-      />
-      {/* 表壳 */}
-      <div className="watch-frame w-full h-full relative">
-        {/* 表冠 */}
-        <div
-          className="absolute right-0 top-1/2 -translate-y-1/2 rounded-r-sm"
-          style={{
-            width: 6,
-            height: 30,
-            background: 'linear-gradient(90deg, #2a2a2a, #3a3a3a)',
-            right: -4,
-          }}
-        />
-        {/* 屏幕 */}
-        <div
-          className="absolute overflow-hidden"
-          style={{
-            top: 8,
-            left: 8,
-            right: 8,
-            bottom: 8,
-            borderRadius: 22,
-            background: '#030308',
-          }}
-        >
-          {children}
+    <header className="relative z-10 flex items-center justify-between px-6 py-4 border-b border-white/8">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl" style={{ background: 'oklch(0.45 0.22 22 / 20%)', border: '1px solid oklch(0.45 0.22 22 / 30%)' }}>
+          ⚔️
+        </div>
+        <div>
+          <h1 className="font-bold text-white text-lg leading-tight" style={{ fontFamily: 'Noto Serif SC, serif' }}>
+            水浒传：梁山风云录
+          </h1>
+          <p className="text-xs text-white/40">运动驱动叙事 RPG · 替天行道</p>
         </div>
       </div>
-    </div>
+      
+      {/* 视图切换 */}
+      <div className="flex bg-white/5 rounded-xl p-1 gap-1">
+        {[
+          { id: 'iphone' as const, label: '📱 iPhone' },
+          { id: 'both' as const, label: '双端' },
+          { id: 'watch' as const, label: '⌚ Watch' },
+        ].map(v => (
+          <button
+            key={v.id}
+            onClick={() => setViewMode(v.id)}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
+            style={{
+              background: viewMode === v.id ? 'oklch(0.45 0.22 22 / 40%)' : 'transparent',
+              color: viewMode === v.id ? 'white' : 'rgba(255,255,255,0.4)',
+            }}
+          >
+            {v.label}
+          </button>
+        ))}
+      </div>
+    </header>
   );
 }
 
-// 产品介绍区域
 function ProductIntro() {
   return (
-    <div className="text-center mb-8 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="text-xs font-cinzel mb-2 tracking-widest" style={{ color: '#C9A84C', opacity: 0.7 }}>
-          ZEN GARDEN · 禅定花园
+    <div className="max-w-4xl mx-auto px-6 py-8">
+      {/* 英雄区 */}
+      <div className="relative rounded-2xl overflow-hidden mb-8" style={{ height: 280 }}>
+        <img src={HERO_BANNER} alt="梁山风云录" className="w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%)' }} />
+        <div className="absolute inset-0 flex flex-col justify-end p-8">
+          <div className="max-w-lg">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs px-2 py-1 rounded-full text-amber-400 border border-amber-400/30" style={{ background: 'rgba(243,156,18,0.1)' }}>
+                运动驱动 RPG
+              </span>
+              <span className="text-xs px-2 py-1 rounded-full text-blue-400 border border-blue-400/30" style={{ background: 'rgba(41,128,185,0.1)' }}>
+                健康游戏化
+              </span>
+            </div>
+            <h2 className="text-3xl font-bold text-white mb-2" style={{ fontFamily: 'Noto Serif SC, serif' }}>
+              习武即运动，聚义即修行
+            </h2>
+            <p className="text-white/70 text-sm leading-relaxed">
+              穿越至北宋末年，通过现实运动数据驱动游戏进程。你每天走的路，是行走江湖的里程；你的心率，决定梁山战役的胜负。
+            </p>
+          </div>
         </div>
-        <h1 className="text-3xl font-serif-sc font-black mb-2 glow-gold">
-          <span style={{ color: '#FFD700' }}>拨珠即修行</span>
-          <span style={{ color: '#E8DCC8' }}> · </span>
-          <span style={{ color: '#C9A84C' }}>功德化境界</span>
-        </h1>
-        <p className="text-sm font-serif-sc opacity-60 max-w-md mx-auto" style={{ color: '#E8DCC8' }}>
-          在指尖拨动佛珠，在掌心建造净土。从破败佛斋到西方极乐世界，十个境界，一段修行之旅。
-        </p>
-      </motion.div>
-    </div>
-  );
-}
+      </div>
 
-// 功能亮点
-function FeatureHighlights() {
-  const features = [
-    { icon: '📿', title: '三种珠串', desc: '菩提珠 · 琉璃珠 · 红玛瑙珠' },
-    { icon: '🏯', title: '十级禅堂', desc: '从破败佛斋到西方极乐世界' },
-    { icon: '⌚', title: 'Watch联动', desc: '双端实时同步，振动仪式感' },
-    { icon: '🎵', title: '禅意音景', desc: '程序化合成，随境界切换' },
-  ];
-
-  return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 px-4 mb-8 max-w-2xl mx-auto w-full">
-      {features.map((f, i) => (
-        <motion.div
-          key={f.title}
-          className="zen-card rounded-2xl p-3 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 + i * 0.1 }}
-        >
-          <div className="text-2xl mb-1">{f.icon}</div>
-          <div className="text-xs font-serif-sc font-bold mb-0.5" style={{ color: '#C9A84C' }}>
-            {f.title}
+      {/* 核心特性 */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {[
+          { icon: '👣', title: '步数驱动', desc: '每100步=1里程，行走江湖' },
+          { icon: '❤️', title: '心率战斗', desc: '心率越高，攻击倍率越强' },
+          { icon: '🌙', title: '睡眠养精', desc: '优质睡眠，获得忠义奖励' },
+          { icon: '⚖️', title: '公平游戏', desc: '只卖外观，不卖数值' },
+        ].map(feat => (
+          <div key={feat.title} className="ink-card p-4 text-center">
+            <div className="text-2xl mb-2">{feat.icon}</div>
+            <div className="text-sm font-semibold text-white mb-1" style={{ fontFamily: 'Noto Serif SC, serif' }}>{feat.title}</div>
+            <div className="text-xs text-white/40">{feat.desc}</div>
           </div>
-          <div className="text-xs font-serif-sc opacity-50" style={{ color: '#E8DCC8' }}>
-            {f.desc}
-          </div>
-        </motion.div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
 
 export default function Home() {
-  const [deviceView, setDeviceView] = useState<DeviceView>('both');
+  const [viewMode, setViewMode] = useState<ViewMode>('both');
+  const [showIntro, setShowIntro] = useState(true);
 
   return (
-    <ZenProvider>
-      <div
-        className="min-h-screen flex flex-col items-center"
-        style={{
-          background: 'radial-gradient(ellipse at top, #0F1428 0%, #030308 60%)',
-          paddingBottom: '4rem',
-        }}
-      >
-        {/* 顶部导航 */}
-        <nav
-          className="w-full flex justify-between items-center px-6 py-4 sticky top-0 z-50"
+    <GameProvider>
+      <div className="min-h-screen" style={{ background: 'oklch(0.10 0.005 285)' }}>
+        {/* 背景纹理 */}
+        <div
+          className="fixed inset-0 pointer-events-none opacity-3"
           style={{
-            background: 'rgba(3,3,8,0.8)',
-            backdropFilter: 'blur(20px)',
-            borderBottom: '1px solid rgba(201,168,76,0.1)',
+            backgroundImage: `radial-gradient(circle at 20% 50%, oklch(0.45 0.22 22 / 15%) 0%, transparent 50%), radial-gradient(circle at 80% 20%, oklch(0.78 0.12 75 / 10%) 0%, transparent 50%)`,
           }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-lg">🪷</span>
-            <span className="text-sm font-serif-sc font-bold" style={{ color: '#C9A84C' }}>
-              禅定花园
-            </span>
-          </div>
-          <div className="flex gap-1">
-            {[
-              { id: 'both' as DeviceView, label: '双端' },
-              { id: 'phone' as DeviceView, label: 'iPhone' },
-              { id: 'watch' as DeviceView, label: 'Watch' },
-            ].map(btn => (
-              <button
-                key={btn.id}
-                onClick={() => setDeviceView(btn.id)}
-                className="px-3 py-1 rounded-full text-xs font-serif-sc transition-all"
-                style={{
-                  background: deviceView === btn.id ? 'rgba(201,168,76,0.2)' : 'transparent',
-                  color: deviceView === btn.id ? '#FFD700' : '#888',
-                  border: `1px solid ${deviceView === btn.id ? 'rgba(201,168,76,0.4)' : 'transparent'}`,
-                }}
-              >
-                {btn.label}
-              </button>
-            ))}
-          </div>
-        </nav>
+        />
 
-        {/* 主内容 */}
-        <div className="flex flex-col items-center w-full pt-8">
-          <ProductIntro />
+        <AppHeader viewMode={viewMode} setViewMode={setViewMode} />
 
-          {/* 设备模拟器区域 */}
-          <div className="flex flex-col items-center w-full px-4">
-            <AnimatePresence mode="wait">
-              {deviceView === 'both' && (
-                <motion.div
-                  key="both"
-                  className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  {/* iPhone 模拟器 */}
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="text-xs font-cinzel opacity-50" style={{ color: '#C9A84C' }}>
-                      iPhone · 禅堂场景
-                    </div>
-                    <motion.div
-                      initial={{ y: 30, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
-                    >
-                      <PhoneFrame>
-                        <PhoneApp />
-                      </PhoneFrame>
-                    </motion.div>
-                  </div>
-
-                  {/* 连接线 */}
-                  <div className="hidden lg:flex flex-col items-center gap-2">
-                    <div className="text-xs font-serif-sc opacity-40" style={{ color: '#C9A84C' }}>
-                      实时同步
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-px" style={{ background: 'rgba(201,168,76,0.3)' }} />
-                      <motion.div
-                        className="w-2 h-2 rounded-full"
-                        style={{ background: '#C9A84C' }}
-                        animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      />
-                      <div className="w-8 h-px" style={{ background: 'rgba(201,168,76,0.3)' }} />
-                    </div>
-                    <div className="text-xs font-serif-sc opacity-30" style={{ color: '#C9A84C' }}>
-                      WatchConnectivity
-                    </div>
-                  </div>
-
-                  {/* Apple Watch 模拟器 */}
-                  <div className="flex flex-col items-center gap-3">
-                    <div className="text-xs font-cinzel opacity-50" style={{ color: '#C9A84C' }}>
-                      Apple Watch · 佛珠拨动
-                    </div>
-                    <motion.div
-                      initial={{ y: 30, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.4, type: 'spring', stiffness: 100 }}
-                    >
-                      <WatchFrame>
-                        <WatchApp />
-                      </WatchFrame>
-                    </motion.div>
-                    <div className="text-xs font-serif-sc opacity-40 text-center" style={{ color: '#E8DCC8' }}>
-                      滚轮 = Digital Crown
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {deviceView === 'phone' && (
-                <motion.div
-                  key="phone"
-                  className="flex flex-col items-center gap-3"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                >
-                  <div className="text-xs font-cinzel opacity-50" style={{ color: '#C9A84C' }}>
-                    iPhone · 完整体验
-                  </div>
-                  <PhoneFrame>
-                    <PhoneApp />
-                  </PhoneFrame>
-                </motion.div>
-              )}
-
-              {deviceView === 'watch' && (
-                <motion.div
-                  key="watch"
-                  className="flex flex-col items-center gap-3"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                >
-                  <div className="text-xs font-cinzel opacity-50" style={{ color: '#C9A84C' }}>
-                    Apple Watch · 佛珠体验
-                  </div>
-                  <WatchFrame>
-                    <WatchApp />
-                  </WatchFrame>
-                  <div className="text-xs font-serif-sc opacity-40 text-center" style={{ color: '#E8DCC8' }}>
-                    使用鼠标滚轮模拟 Digital Crown 旋转
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* 功能亮点 */}
-          <div className="mt-12 w-full">
-            <div className="text-center mb-6">
-              <div className="zen-divider max-w-xs mx-auto mb-4" />
-              <h2 className="text-lg font-serif-sc font-black" style={{ color: '#C9A84C' }}>
-                产品特色
-              </h2>
-            </div>
-            <FeatureHighlights />
-          </div>
-
-          {/* 境界预览 */}
-          <div className="mt-4 w-full max-w-2xl px-4">
-            <div className="text-center mb-6">
-              <div className="zen-divider max-w-xs mx-auto mb-4" />
-              <h2 className="text-lg font-serif-sc font-black" style={{ color: '#C9A84C' }}>
-                十级禅堂境界
-              </h2>
-              <p className="text-xs font-serif-sc opacity-50 mt-1" style={{ color: '#E8DCC8' }}>
-                从破败佛斋到西方极乐世界
-              </p>
-            </div>
-            <LevelPreview />
-          </div>
-
-          {/* 底部引言 */}
-          <div className="mt-12 text-center px-6">
-            <div className="zen-divider max-w-xs mx-auto mb-6" />
-            <p className="text-sm font-serif-sc italic opacity-50" style={{ color: '#E8DCC8' }}>
-              「一花一世界，一叶一菩提。」
-            </p>
-            <p className="text-xs font-serif-sc opacity-30 mt-2" style={{ color: '#E8DCC8' }}>
-              ——《华严经》
-            </p>
-            <div className="mt-6 text-xs font-serif-sc opacity-20" style={{ color: '#C9A84C' }}>
-              禅定花园 · Zen Garden · v1.0
-            </div>
+        {/* 产品介绍切换 */}
+        <div className="flex justify-center py-3 border-b border-white/5">
+          <div className="flex bg-white/5 rounded-xl p-1">
+            <button
+              onClick={() => setShowIntro(true)}
+              className="px-4 py-1.5 rounded-lg text-xs font-semibold transition-all"
+              style={{
+                background: showIntro ? 'oklch(0.22 0.008 285)' : 'transparent',
+                color: showIntro ? 'white' : 'rgba(255,255,255,0.4)',
+              }}
+            >
+              产品介绍
+            </button>
+            <button
+              onClick={() => setShowIntro(false)}
+              className="px-4 py-1.5 rounded-lg text-xs font-semibold transition-all"
+              style={{
+                background: !showIntro ? 'oklch(0.22 0.008 285)' : 'transparent',
+                color: !showIntro ? 'white' : 'rgba(255,255,255,0.4)',
+              }}
+            >
+              交互演示
+            </button>
           </div>
         </div>
-      </div>
-    </ZenProvider>
-  );
-}
 
-// 境界预览组件
-function LevelPreview() {
-  const [hoveredLevel, setHoveredLevel] = useState<number | null>(null);
+        {showIntro ? (
+          <ProductIntro />
+        ) : (
+          /* 设备展示区 */
+          <main className="flex flex-col items-center py-8 px-4">
+            {/* 双端展示 */}
+            {viewMode === 'both' && (
+              <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16 w-full max-w-5xl">
+                {/* iPhone */}
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">📱</span>
+                    <span className="text-sm font-semibold text-white/60">iPhone 端</span>
+                    <span className="text-xs text-white/30">iOS 16.0+</span>
+                  </div>
+                  <IPhoneFrame />
+                </div>
 
-  return (
-    <div className="space-y-2">
-      {ZEN_LEVELS.map((level, i) => (
-        <motion.div
-          key={level.level}
-          className="relative rounded-2xl overflow-hidden cursor-pointer"
-          style={{
-            border: `1px solid ${hoveredLevel === level.level ? 'rgba(201,168,76,0.5)' : 'rgba(201,168,76,0.1)'}`,
-          }}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.05 }}
-          onMouseEnter={() => setHoveredLevel(level.level)}
-          onMouseLeave={() => setHoveredLevel(null)}
-        >
-          <div className="flex items-center gap-3 p-3">
-            <div className="relative w-16 h-12 rounded-xl overflow-hidden flex-shrink-0">
-              <img
-                src={level.sceneImage}
-                alt={level.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/30" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-cinzel" style={{ color: '#C9A84C' }}>
-                  Lv.{level.level}
-                </span>
-                <span className="text-sm font-serif-sc font-bold" style={{ color: '#E8DCC8' }}>
-                  {level.name}
-                </span>
-                <span className="text-xs font-serif-sc opacity-50" style={{ color: '#E8DCC8' }}>
-                  {level.subtitle}
-                </span>
-              </div>
-              <div className="text-xs font-serif-sc opacity-40 mt-0.5" style={{ color: '#E8DCC8' }}>
-                {level.atmosphere}
-              </div>
-            </div>
-            <div className="text-right flex-shrink-0">
-              <div className="text-xs font-cinzel" style={{ color: '#C9A84C' }}>
-                {level.requiredMerit === 0 ? '初始' : formatMerit(level.requiredMerit)}
-              </div>
-            </div>
-          </div>
+                {/* 分隔线 */}
+                <div className="hidden lg:flex flex-col items-center gap-4">
+                  <div className="h-40 w-px bg-white/10" />
+                  <div className="text-white/20 text-xs text-center">双端<br/>协同</div>
+                  <div className="h-40 w-px bg-white/10" />
+                </div>
 
-          {/* 悬停展开偈语 */}
-          <AnimatePresence>
-            {hoveredLevel === level.level && (
-              <motion.div
-                className="px-4 pb-3"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-              >
-                <div className="zen-divider mb-2" />
-                <p className="text-xs font-serif-sc italic" style={{ color: '#C9A84C' }}>
-                  「{level.verse}」
-                </p>
-              </motion.div>
+                {/* Watch */}
+                <div className="flex flex-col items-center gap-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg">⌚</span>
+                    <span className="text-sm font-semibold text-white/60">Apple Watch 端</span>
+                    <span className="text-xs text-white/30">watchOS 9.0+</span>
+                  </div>
+                  <WatchSimulator />
+                </div>
+              </div>
             )}
-          </AnimatePresence>
-        </motion.div>
-      ))}
-    </div>
+
+            {viewMode === 'iphone' && (
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg">📱</span>
+                  <span className="text-sm font-semibold text-white/60">iPhone 端 · iOS 16.0+</span>
+                </div>
+                <IPhoneFrame />
+              </div>
+            )}
+
+            {viewMode === 'watch' && (
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-lg">⌚</span>
+                  <span className="text-sm font-semibold text-white/60">Apple Watch 端 · watchOS 9.0+</span>
+                </div>
+                <WatchSimulator />
+                <div className="mt-4 ink-card p-4 max-w-xs text-center">
+                  <p className="text-xs text-white/50 leading-relaxed">
+                    点击表盘底部图标切换屏幕。<br/>
+                    Digital Crown（右上按钮）→ 今日统计<br/>
+                    侧边按钮（右下按钮）→ 快捷操作
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* 功能说明 */}
+            <div className="mt-12 max-w-2xl w-full">
+              <h3 className="text-center text-white/40 text-sm mb-6" style={{ fontFamily: 'Noto Serif SC, serif' }}>
+                — 核心功能一览 —
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  {
+                    platform: '📱 iPhone 端',
+                    features: [
+                      '聚义厅主界面 · 健康数据仪表盘',
+                      '好汉招募与管理 · 四大核心好汉',
+                      '替天行道战役 · 36战主线叙事',
+                      '兵器谱 · 10件神兵宝物图鉴',
+                      '替天行道日志 · 数据可视化复盘',
+                    ],
+                  },
+                  {
+                    platform: '⌚ Apple Watch 端',
+                    features: [
+                      '聚义进度表盘 · 双环实时进度',
+                      '习武运动模式 · 心率区间监测',
+                      '梁山战役模式 · 心率驱动战斗',
+                      '快捷操作面板 · 饮酒/赏金/悔过',
+                      '今日功课统计 · 三环活动数据',
+                    ],
+                  },
+                ].map(section => (
+                  <div key={section.platform} className="ink-card p-4">
+                    <h4 className="text-sm font-semibold text-white mb-3">{section.platform}</h4>
+                    <ul className="space-y-1.5">
+                      {section.features.map(f => (
+                        <li key={f} className="flex items-start gap-2 text-xs text-white/50">
+                          <span className="text-amber-400 mt-0.5 flex-shrink-0">·</span>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </main>
+        )}
+
+        {/* 底部 */}
+        <footer className="text-center py-8 border-t border-white/5">
+          <p className="text-xs text-white/20">水浒传：梁山风云录 v1.0.0 · 运动驱动叙事 RPG</p>
+          <p className="text-xs text-white/15 mt-1">只卖外观，不卖数值 · 公平游戏承诺</p>
+        </footer>
+      </div>
+    </GameProvider>
   );
 }

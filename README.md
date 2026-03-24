@@ -1,202 +1,110 @@
-# 禅定花园 · Zen Garden
+# 水浒传：梁山风云录
 
-> 拨珠即修行，功德化境界。在指尖拨动佛珠，在掌心建造净土。
+> 运动驱动叙事 RPG · 替天行道，聚义梁山
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-iOS%2016%2B%20%7C%20watchOS%209%2B-black)](./ZenGarden/)
-[![Swift](https://img.shields.io/badge/Swift-5.9-orange)](./ZenGarden/)
+## 产品概述
 
----
+《水浒传：梁山风云录》是一款以北宋末年为背景的运动驱动叙事 RPG 游戏。玩家通过现实中的运动数据（步数、心率、睡眠）驱动游戏进程，在江湖中招募好汉、历经战役、积累忠义值，最终达成"替天行道"的境界。
 
-## 仓库概览
+## 核心机制
 
-本仓库由 **Manus AI** 构建与维护，汇集了多个独立项目。每个项目均位于独立子目录中，并附有专属 `README.md` 以便查阅和维护。
+| 运动数据 | 游戏效果 |
+|---------|---------|
+| 每100步 | = 1 里程，推进江湖旅程 |
+| 步数达标 | 获得忠义值，解锁战役 |
+| 心率区间 | 决定战斗攻击倍率（0.8x ~ 2.5x） |
+| 深度睡眠 | 养精蓄锐，获得忠义奖励 |
+| 连续习武 | 连击奖励，激励长期坚持 |
 
-| 项目名称 | 目录 | 技术栈 | 简介 |
-| :--- | :--- | :--- | :--- |
-| **禅定花园 · 原生应用** | [`ZenGarden/`](./ZenGarden/) | `SwiftUI` · `iOS 16+` · `watchOS 9+` | Apple 双平台原生应用，iPhone + Apple Watch 双屏联动，用于禅意冥想与计数修行。 |
-| **禅定花园 · Web 原型** | [`client/`](./client/) | `React 19` · `TypeScript` · `Web Audio API` | 浏览器端交互原型，完整还原双端界面与核心交互逻辑，可直接在浏览器中体验。 |
-| **生存者传说** | [`app/`](./app/) | `React Native` · `Expo` · `TypeScript` | 肉鸽（Roguelike）生存射击手游，主角自动瞄准并射击不断出现的怪物。 |
-| **银河征服者** | [`galaxy-conquest/`](./galaxy-conquest/) | `React` · `TypeScript` · `Vite` | Web 端太空策略游戏，玩家管理舰队、征服星球。 |
+## 功能模块
 
----
+### 📱 iPhone 端
 
-## 禅定花园 · 产品简介
+- **聚义厅主界面** — 健康数据仪表盘，忠义/恶念状态，江湖里程
+- **好汉招募与管理** — 4位核心好汉（宋江/卢俊义/吴用/李逵），属性展示，兵器装备
+- **替天行道战役** — 36战主线叙事，运动数据解锁，战役引擎
+- **兵器谱** — 10件神兵宝物图鉴，三品级收集系统
+- **替天行道日志** — 周步数柱状图，忠义趋势折线图，江湖足迹时间线
 
-**禅定花园**是一款以佛教文化为核心主题的双端协同应用（iPhone + Apple Watch），通过拨动佛珠积累功德值，逐步将破败佛斋升华为西方极乐世界。本仓库同时包含：
+### ⌚ Apple Watch 端
 
-- **Web 交互原型**（`client/` 目录，React + TypeScript）：完整还原了双端界面与核心交互逻辑，可在浏览器中预览。
-- **原生 Apple 应用**（[`ZenGarden/`](./ZenGarden/) 目录，SwiftUI）：面向真实设备的 iOS + watchOS 原生实现，支持 WatchConnectivity 双屏联动。
+- **聚义进度表盘** — 双环实时进度（步数环 + 忠义环），心率显示
+- **习武运动模式** — 实时心率区间，运动计时，卡路里消耗
+- **梁山战役模式** — 心率驱动战斗，攻击倍率计算，战斗日志
+- **快捷操作面板** — 饮酒(+20忠义)/赏金(+10忠义)/悔过(-10恶念)/召集
+- **今日功课统计** — 三环活动数据（步数/活动/站立）
 
----
+## 忠义境界系统
 
-## 核心功能
+| 境界 | 忠义值范围 | 描述 |
+|-----|-----------|------|
+| 初入江湖 | 0 - 999 | 刚踏上习武之路 |
+| 小有名气 | 1,000 - 4,999 | 已在江湖崭露头角 |
+| 义薄云天 | 5,000 - 14,999 | 忠义之名传遍四方 |
+| 梁山柱石 | 15,000 - 29,999 | 梁山不可或缺之栋梁 |
+| 天罡地煞 | 30,000 - 59,999 | 天罡地煞，威震四海 |
+| 替天行道 | 60,000+ | 替天行道，功德圆满 |
 
-### 佛珠系统
+## 技术栈
 
-三种珠串材质各具特色：**菩提珠**（初始解锁）、**琉璃珠**（1,000 功德解锁）、**红玛瑙珠**（5,000 功德解锁）。Web 版采用弹簧-阻尼物理引擎模拟真实念珠的惯性与阻力，配合俯视角透视缩放渲染，呈现近大远小的立体效果。每 18 颗一组，母珠（卍字标记）触发特殊音效。
+- **前端框架**: React 19 + TypeScript
+- **样式系统**: Tailwind CSS 4 + 自定义水墨主题
+- **图表库**: Recharts
+- **动画**: Framer Motion + CSS Animations
+- **状态管理**: React Context + useReducer
+- **路由**: Wouter
+- **构建工具**: Vite 7
 
-### 功德与境界系统
+## 设计系统
 
-共 10 级禅堂升级，从「破败佛斋」到「西方极乐世界」，每次升级触发金光爆发粒子特效与偈语展示。界面实时显示进度条与距下一境界所需功德。
+**设计哲学**: 水墨江湖·沉浸叙事
 
-### 音效系统（Web Audio API 程序化合成）
+- **主色调**: 深色水墨底色 `oklch(0.10 0.005 285)`
+- **英雄红**: `oklch(0.45 0.22 22)` ≈ `#C0392B`
+- **金黄高光**: `oklch(0.78 0.12 75)` ≈ `#F39C12`
+- **字体**: 思源宋体（标题）+ 思源黑体（正文）
 
-全部音效均通过 Web Audio API 程序化合成，无需外部音频文件：拨珠音效依据珠串材质差异化音色，母珠叠加泛音增强庄严感，升级音效三层叠加（低频钟声 + 高频泛音 + 短促钟鸣），背景音乐随境界切换（晨钟 → 梵唱 → 莲池 → 天籁）。
+## 商业模式
 
-### 双端界面对照
+- **基础版**: 免费，包含核心运动追踪与主线战役
+- **梁山聚义令**: ¥30/月，解锁全部好汉传记、额外忠义加成、专属皮肤
+- **公平游戏承诺**: 只卖外观，不卖数值
 
-| 功能 | iPhone | Apple Watch |
-| :--- | :--- | :--- |
-| 佛珠拨动 | 滑动 / 点击 | 滑动 / 点击 / Digital Crown |
-| 禅堂场景 | 全屏沉浸式 | 进度环表盘 |
-| 功德统计 | 详细图表 | 简洁数字 |
-| 图鉴系统 | 10 境界卡片 | — |
-| 振动反馈 | — | 每 100 颗触发 |
-| 设置 | 音效 / 振动 | 音效 / 振动 |
-
----
-
-## 境界一览
-
-| 等级 | 名称 | 所需功德 | 氛围 |
-| :--- | :--- | :--- | :--- |
-| Lv.1 | 破败佛斋 | 0 | 尘埃飞舞，寂静萧索 |
-| Lv.2 | 修缮茅屋 | 1,000 | 烛光摇曳，暖意渐生 |
-| Lv.3 | 石基木屋 | 5,000 | 木香弥漫，经声隐隐 |
-| Lv.4 | 清雅禅院 | 20,000 | 菩提树下，清风徐来 |
-| Lv.5 | 大殿初成 | 100,000 | 香烟袅袅，梵音绕梁 |
-| Lv.6 | 宏伟寺庙 | 500,000 | 钟声悠扬，香客如云 |
-| Lv.7 | 琉璃净土 | 2,000,000 | 琉璃地面，七宝庄严 |
-| Lv.8 | 莲池海会 | 10,000,000 | 莲花盛开，天乐自鸣 |
-| Lv.9 | 妙音天国 | 50,000,000 | 神鸟演法，曼陀罗花雨 |
-| Lv.10 | 西方极乐世界 | 100,000,000 | 无量光明，极乐庄严 |
-
----
-
-## 技术架构
-
-### Web 原型（`client/` 目录）
-
-```
-client/
-├── src/
-│   ├── components/
-│   │   ├── BeadCanvas.tsx      # 佛珠渲染引擎（Canvas + 物理）
-│   │   ├── PhoneApp.tsx        # iPhone 端完整界面
-│   │   └── WatchApp.tsx        # Apple Watch 端界面
-│   ├── contexts/
-│   │   └── ZenContext.tsx      # 全局状态管理
-│   └── lib/
-│       ├── zenStore.ts         # 数据模型 + 本地存储
-│       └── audioEngine.ts      # Web Audio 音效引擎
-└── index.html
-```
-
-**技术栈**：React 19 · TypeScript · Tailwind CSS 4 · Framer Motion · Web Audio API · HTML5 Canvas · localStorage
-
-### 原生 Apple 应用（`ZenGarden/` 目录）
-
-```
-ZenGarden/
-├── ZenGarden.xcodeproj/            # Xcode 项目文件
-├── Shared/Sources/
-│   └── ZenModels.swift             # iOS + watchOS 共享数据模型
-├── ZenGarden/Sources/              # iOS 应用
-│   ├── ZenGardenApp.swift          # 应用入口
-│   ├── Views/ContentView.swift     # 全部 iOS 界面
-│   └── ViewModels/ZenStore.swift   # 状态管理 + WatchConnectivity
-└── ZenGardenWatch/Sources/         # watchOS 应用
-    ├── ZenGardenWatchApp.swift
-    ├── Views/WatchContentView.swift
-    └── ViewModels/WatchStore.swift
-```
-
-**技术栈**：SwiftUI · MVVM · WatchConnectivity · UserDefaults · Digital Crown API · UIImpactFeedbackGenerator
-
----
-
-## 快速开始
-
-### Web 原型
+## 开发运行
 
 ```bash
 # 安装依赖
 pnpm install
 
-# 启动开发服务器
+# 开发模式
 pnpm dev
 
 # 构建生产版本
 pnpm build
 ```
 
-### 原生 Apple 应用
+## 项目结构
 
-```bash
-# 克隆仓库
-git clone https://github.com/wq372878057-sys/benson-game.git
-
-# 进入原生应用目录
-cd benson-game/ZenGarden
-
-# 用 Xcode 打开
-open ZenGarden.xcodeproj
+```
+client/src/
+├── components/
+│   ├── iphone/          # iPhone 端组件
+│   │   ├── IPhoneFrame.tsx    # iPhone 外壳与导航
+│   │   ├── HomeScreen.tsx     # 聚义厅主界面
+│   │   ├── HeroesScreen.tsx   # 好汉管理
+│   │   ├── BattlesScreen.tsx  # 战役与技能
+│   │   ├── WeaponsScreen.tsx  # 兵器谱
+│   │   └── JournalScreen.tsx  # 日志与数据
+│   └── watch/           # Apple Watch 端组件
+│       └── WatchSimulator.tsx # Watch 模拟器（5个屏幕）
+├── contexts/
+│   └── GameContext.tsx   # 全局游戏状态管理
+├── lib/
+│   └── gameData.ts       # 游戏数据定义与初始状态
+└── pages/
+    └── Home.tsx          # 主页面（产品介绍 + 交互演示）
 ```
 
-在 Xcode 中为 `ZenGarden`（iOS）和 `ZenGardenWatch`（watchOS）两个 Target 设置您的 Apple Developer Team 和 Bundle ID，即可编译运行。详细说明请参阅 [ZenGarden/README.md](./ZenGarden/README.md)。
-
 ---
 
-## 操作说明
-
-### 网页端
-
-- **点击 / 滑动**佛珠画布拨动佛珠
-- **键盘**：空格键 / → 拨珠，← 反向拨珠
-- **鼠标滚轮**（Watch 区域）：模拟 Digital Crown
-
-### 手机端（真机）
-
-- **触摸滑动**拨动佛珠
-- **上滑** Watch 界面进入统计
-- **下滑**进入设置
-
----
-
-## 设计美学
-
-**金碧禅境**设计哲学以宇宙般的静谧为底色，以佛光普照的温暖为主调：
-
-| 色彩用途 | 色值 |
-| :--- | :--- |
-| 底色（夜空深蓝） | `#030308` |
-| 主金（金箔色） | `#C9A84C` |
-| 亮金（功德圆满） | `#FFD700` |
-| 玉白（经文纯净） | `#E8DCC8` |
-
-字体选用**宋体**（庄严）搭配 **Cinzel Decorative**（神圣数字），营造东西方美学融合的禅意氛围。
-
----
-
-## 维护指南
-
-本仓库由 Manus AI 持续维护，以下是面向开发者的维护建议。
-
-**环境要求**方面，Web 项目需要 Node.js 18+ 和 pnpm；原生 Apple 应用需要 macOS Ventura 13.0+、Xcode 15.0+、iOS 16+ / watchOS 9+ 设备或模拟器。
-
-**依赖管理**方面，所有 JavaScript 项目均使用 `pnpm` 并附有 `pnpm-lock.yaml`，确保依赖版本一致性；Swift 项目依赖由 Xcode 直接管理。
-
-**代码提交**方面，建议在修改前创建新分支以保持 `main` 分支整洁，提交信息请遵循规范格式，例如 `feat(ZenGarden): 添加新的佛珠样式` 或 `fix(app): 修复怪物生成逻辑错误`。
-
-**子项目维护**方面，每个子目录均有独立的 `README.md`，如需深入了解某个项目的架构细节、API 文档或扩展方式，请直接查阅对应文件。
-
----
-
-## License
-
-MIT © 2026 Zen Garden
-
----
-
-> 「一花一世界，一叶一菩提。」——《华严经》
+*水浒传：梁山风云录 v1.0.0 · 运动驱动叙事 RPG*

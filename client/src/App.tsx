@@ -21,7 +21,16 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
-          <Toaster />
+          <Toaster 
+            theme="dark"
+            toastOptions={{
+              style: {
+                background: 'oklch(0.16 0.006 285)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: 'white',
+              },
+            }}
+          />
           <Router />
         </TooltipProvider>
       </ThemeProvider>
