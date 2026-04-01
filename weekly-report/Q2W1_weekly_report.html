@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q2W1【对外合作组】周度经营汇报</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    /* ===== 基础重置与字体 ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      background: #f0f2f7;
+      color: #1a1f36;
+      line-height: 1.6;
+    }
+
+    /* ===== 顶部封面 ===== */
+    .cover {
+      background: linear-gradient(135deg, #1a1f5e 0%, #2d3a8c 40%, #1e6fa8 100%);
+      color: #fff;
+      padding: 52px 60px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: "";
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .cover::after {
+      content: "";
+      position: absolute;
+      bottom: -60px; left: 30%;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .cover-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+    }
+    .cover h1 {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .cover-meta {
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      opacity: 0.85;
+      flex-wrap: wrap;
+    }
+    .cover-meta span { display: flex; align-items: center; gap: 6px; }
+    .cover-meta .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #4ade80;
+      display: inline-block;
+    }
+
+    /* ===== 主体布局 ===== */
+    .main { max-width: 1100px; margin: 0 auto; padding: 36px 24px 60px; }
+
+    /* ===== 节标题 ===== */
+    .section { margin-bottom: 36px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .icon-blue   { background: #dbeafe; }
+    .icon-green  { background: #dcfce7; }
+    .icon-orange { background: #ffedd5; }
+    .icon-red    { background: #fee2e2; }
+    .icon-purple { background: #ede9fe; }
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1f36;
+    }
+    .section-title span {
+      font-size: 13px;
+      font-weight: 400;
+      color: #6b7280;
+      margin-left: 10px;
+    }
+
+    /* ===== 卡片 ===== */
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .card + .card { margin-top: 16px; }
+
+    /* ===== 三列网格 ===== */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    /* ===== 核心规划卡片 ===== */
+    .plan-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-left: 4px solid;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .plan-card.blue  { border-color: #3b82f6; }
+    .plan-card.green { border-color: #22c55e; }
+    .plan-card.purple{ border-color: #a855f7; }
+    .plan-card-icon { font-size: 26px; }
+    .plan-card-title { font-size: 16px; font-weight: 700; color: #1a1f36; }
+    .plan-card-desc  { font-size: 13px; color: #6b7280; line-height: 1.7; }
+
+    /* ===== OKR 进度条 ===== */
+    .okr-item {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 26px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      margin-bottom: 14px;
+    }
+    .okr-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+    .okr-kr { font-size: 13px; font-weight: 700; color: #fff; background: #3b82f6; border-radius: 6px; padding: 2px 10px; }
+    .okr-pct { font-size: 22px; font-weight: 800; color: #3b82f6; }
+    .okr-desc { font-size: 13.5px; color: #374151; margin-bottom: 12px; line-height: 1.7; }
+    .okr-note { font-size: 12.5px; color: #6b7280; background: #f9fafb; border-radius: 8px; padding: 8px 12px; }
+    .progress-bar-bg {
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 10px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1s ease;
+    }
+    .fill-20  { width: 20%; background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .fill-10  { width: 10%; background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .fill-1   { width: 1%;  background: linear-gradient(90deg, #ef4444, #f87171); }
+
+    /* ===== 数据亮点卡片 ===== */
+    .kpi-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .kpi-label { font-size: 12.5px; color: #6b7280; margin-bottom: 6px; }
+    .kpi-value { font-size: 28px; font-weight: 800; }
+    .kpi-sub   { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+    .kpi-up    { color: #22c55e; }
+    .kpi-down  { color: #ef4444; }
+    .kpi-neu   { color: #3b82f6; }
+
+    /* ===== 渠道表格 ===== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    thead th {
+      background: #f1f5f9;
+      color: #374151;
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+    }
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #374151;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #f9fafb; }
+    .badge {
+      display: inline-block;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-green  { background: #dcfce7; color: #16a34a; }
+    .badge-yellow { background: #fef9c3; color: #ca8a04; }
+    .badge-blue   { background: #dbeafe; color: #1d4ed8; }
+    .badge-gray   { background: #f3f4f6; color: #6b7280; }
+
+    /* ===== 图表容器 ===== */
+    .chart-wrap {
+      position: relative;
+      height: 240px;
+    }
+    .chart-wrap-lg {
+      position: relative;
+      height: 280px;
+    }
+    .chart-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 14px;
+    }
+
+    /* ===== 卡点模块 ===== */
+    .risk-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-left: 4px solid;
+    }
+    .risk-card.warn  { border-color: #f59e0b; }
+    .risk-card.action{ border-color: #3b82f6; }
+    .risk-card.need  { border-color: #a855f7; }
+    .risk-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+    .risk-item  { font-size: 13px; color: #4b5563; padding: 5px 0; display: flex; gap: 8px; align-items: flex-start; }
+    .risk-item::before { content: "·"; font-size: 20px; line-height: 1; color: #9ca3af; flex-shrink: 0; }
+
+    /* ===== 下周计划 ===== */
+    .plan-next {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 26px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .plan-next-title {
+      font-size: 15px; font-weight: 700; color: #1a1f36;
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .plan-next-title .tag {
+      font-size: 11px; font-weight: 600;
+      background: #ede9fe; color: #7c3aed;
+      border-radius: 5px; padding: 2px 8px;
+    }
+    .plan-next-item {
+      font-size: 13px; color: #4b5563;
+      padding: 5px 0 5px 18px;
+      position: relative;
+      border-bottom: 1px dashed #f3f4f6;
+    }
+    .plan-next-item:last-child { border-bottom: none; }
+    .plan-next-item::before {
+      content: "▸";
+      position: absolute; left: 0;
+      color: #7c3aed;
+    }
+
+    /* ===== 广告收益折线图说明 ===== */
+    .insight-box {
+      background: #f0f9ff;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #0369a1;
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+    .insight-box strong { color: #0c4a6e; }
+
+    /* ===== 页脚 ===== */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #9ca3af;
+      padding: 24px 0 8px;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 20px;
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 768px) {
+      .cover { padding: 36px 24px 30px; }
+      .cover h1 { font-size: 24px; }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .main { padding: 24px 14px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 封面 ===== -->
+<div class="cover">
+  <div class="cover-tag">对外合作组 · 周度经营汇报</div>
+  <h1>Q2 第一周 经营汇报</h1>
+  <div class="cover-meta">
+    <span><span class="dot"></span>负责人：王潜</span>
+    <span>📅 汇报周期：2026.03.27 — 04.02</span>
+    <span>📌 Q2 第 1 周</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ===== 模块一：核心工作规划 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🎯</div>
+      <div class="section-title">模块一：核心工作规划 <span>本季度三大战略方向</span></div>
+    </div>
+    <div class="grid-3">
+      <div class="plan-card blue">
+        <div class="plan-card-icon">📈</div>
+        <div class="plan-card-title">用户增长</div>
+        <div class="plan-card-desc">深化"硬件预装 + 软件植入"模式，提升硬件厂商渗透率与健康应用 API 合作，实现用户环比持续增长。</div>
+      </div>
+      <div class="plan-card green">
+        <div class="plan-card-icon">💰</div>
+        <div class="plan-card-title">商业闭环</div>
+        <div class="plan-card-desc">AI 技术赋能平台运营，算法驱动精准分发与内容扩充，优化转化效率，实现广告产出与内购收入环比增长。</div>
+      </div>
+      <div class="plan-card purple">
+        <div class="plan-card-icon">🚀</div>
+        <div class="plan-card-title">品牌势能</div>
+        <div class="plan-card-desc">依托 AI 生产内容，快速填充短视频平台"体感/手表游戏"垂直领域内容空白，实现核心细分赛道先发占位。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 模块二：Q2 OKR 进度 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-green">🚥</div>
+      <div class="section-title">模块二：Q2 OKR 进度 <span>整体进度 Q2 第 1 周</span></div>
+    </div>
+
+    <div class="okr-item">
+      <div class="okr-header">
+        <span class="okr-kr">KR1</span>
+        <span class="okr-pct">20%</span>
+      </div>
+      <div class="okr-desc">完成总体收入 <strong>4.2 万</strong>，环比 +20%；新增平台用户 <strong>8 万</strong>，环比 +10%；新增游戏 <strong>100 款</strong>，环比 +20%；全网新增粉丝 <strong>1 万</strong>，环比 +200%</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill fill-20"></div></div>
+      <div class="okr-note">📌 预估 5 月新增日活 3 万（联合助力上线）</div>
+    </div>
+
+    <div class="okr-item">
+      <div class="okr-header">
+        <span class="okr-kr">KR2</span>
+        <span class="okr-pct">20%</span>
+      </div>
+      <div class="okr-desc">接入 <strong>3 家</strong>新增硬件/软件厂商；接入小游戏平台广告 CPS 合作</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill fill-20"></div></div>
+      <div class="okr-note">📌 联合助力预计 5 月上线；Minigame 小游戏平台已上线</div>
+    </div>
+
+    <div class="okr-item">
+      <div class="okr-header">
+        <span class="okr-kr">KR3</span>
+        <span class="okr-pct">10%</span>
+      </div>
+      <div class="okr-desc">新增游戏 <strong>100 款</strong>，环比 +20%；策划 <strong>3 场</strong>运营活动，活跃用户环比 +10%，曝光-点击效率环比 +10%</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill fill-10"></div></div>
+      <div class="okr-note">📌 运营活动策划：4 月踏青、5 月劳动、6 月儿童</div>
+    </div>
+
+    <div class="okr-item">
+      <div class="okr-header">
+        <span class="okr-kr">KR4</span>
+        <span class="okr-pct" style="color:#ef4444;">1%</span>
+      </div>
+      <div class="okr-desc">内容输出 <strong>200 条</strong>，环比 +50%；内容总曝光量 <strong>200w</strong>，环比 +50%</div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill fill-1"></div></div>
+      <div class="okr-note">📌 目前日产出 2 条内容（软文图片 + 宣传视频），产能待提升</div>
+    </div>
+  </div>
+
+  <!-- ===== 模块三：本周核心成果 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-orange">🏆</div>
+      <div class="section-title">模块三：本周核心成果</div>
+    </div>
+
+    <!-- 3.1 渠道破局 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="chart-title">📡 渠道破局 — 硬件渠道建联进展</div>
+      <table>
+        <thead>
+          <tr>
+            <th>渠道商</th>
+            <th>合作模式</th>
+            <th>年出货量</th>
+            <th>App 日活</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>联合助力</strong></td>
+            <td>方案 + 品牌</td>
+            <td>1,000 万台</td>
+            <td>60 万</td>
+            <td><span class="badge badge-yellow">预计 5 月上线</span></td>
+          </tr>
+          <tr>
+            <td><strong>新科盈</strong></td>
+            <td>方案 + 品牌</td>
+            <td>800 万台</td>
+            <td>100 万</td>
+            <td><span class="badge badge-green">已上线（流量入口较深）</span></td>
+          </tr>
+          <tr>
+            <td><strong>虎麟科技</strong></td>
+            <td>方案 + 品牌</td>
+            <td>80 万台</td>
+            <td>10 万</td>
+            <td><span class="badge badge-blue">5 月后开始对接</span></td>
+          </tr>
+          <tr>
+            <td><strong>奇力电子</strong></td>
+            <td>建联中</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="badge badge-gray">初步接触</span></td>
+          </tr>
+          <tr>
+            <td><strong>芯视佳 / 睿幄智能</strong></td>
+            <td>建联中</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="badge badge-gray">初步接触</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 3.2 KPI 数字 -->
+    <div class="grid-3" style="margin-bottom:16px;">
+      <div class="kpi-card">
+        <div class="kpi-label">广告总曝光</div>
+        <div class="kpi-value kpi-neu">3.1w</div>
+        <div class="kpi-sub">本周累计</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">广告 eCPM</div>
+        <div class="kpi-value kpi-neu">9.6 元</div>
+        <div class="kpi-sub">本周均值</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">广告周收入</div>
+        <div class="kpi-value kpi-up">$42</div>
+        <div class="kpi-sub">优化后稳定 $6.60+/日</div>
+      </div>
+    </div>
+
+    <!-- 3.3 广告收益趋势图 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="chart-title">📊 广告日收益 & 展示量趋势（3月27日 — 4月2日）</div>
+      <div class="chart-wrap-lg">
+        <canvas id="adChart"></canvas>
+      </div>
+      <div class="insight-box">
+        <strong>优化复盘：</strong>3月27日收益跌至 $3.26（展示量仅 1,994 次），核心游戏未在首屏曝光。将三款高点击率、快启动游戏调整至首屏黄金位后，28日展示量回升至 5,205 次（<strong>+161%</strong>），收益升至 $6.81，后续日均稳定在 <strong>$6.60 以上</strong>。
+      </div>
+    </div>
+
+    <!-- 3.4 内购运营对比 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div class="chart-title">💳 内购平台运营对比</div>
+      <div class="grid-2">
+        <div class="chart-wrap">
+          <canvas id="iapChart"></canvas>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;justify-content:center;">
+          <div class="risk-card warn" style="border-radius:10px;">
+            <div class="risk-title" style="color:#b45309;">⚠️ 纳晶云</div>
+            <div class="risk-item">日活下降 <strong>15.97%</strong>，收入缩水 <strong>22.03%</strong></div>
+            <div class="risk-item">版本迭代过频 + 开屏广告性能缺陷</div>
+            <div class="risk-item">建议：放缓补丁节奏、优化广告渲染</div>
+          </div>
+          <div class="risk-card action" style="border-radius:10px;">
+            <div class="risk-title" style="color:#1d4ed8;">✅ 领为</div>
+            <div class="risk-item">付费率提升 <strong>26.17%</strong>，收入逆势增长 <strong>26.06%</strong></div>
+            <div class="risk-item">主导落地"会员订阅制"，降低用户决策压力</div>
+          </div>
+          <div class="risk-card" style="border-radius:10px;border-color:#ef4444;">
+            <div class="risk-title" style="color:#b91c1c;">📉 光速时代</div>
+            <div class="risk-item">付费率下降 <strong>6.73%</strong>，收入下滑 <strong>8.90%</strong></div>
+            <div class="risk-item">SDK 维护滞后，督促升级 SDK 2.0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.5 AI 产能 -->
+    <div class="grid-3">
+      <div class="kpi-card">
+        <div class="kpi-label">AI 内容作品数</div>
+        <div class="kpi-value kpi-neu">10</div>
+        <div class="kpi-sub">本周产出</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">总曝光量</div>
+        <div class="kpi-value kpi-up">28.4w</div>
+        <div class="kpi-sub">全平台累计</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">点赞 / 新增粉丝</div>
+        <div class="kpi-value kpi-up">966 / 125</div>
+        <div class="kpi-sub">本周数据</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 模块四：卡点与决策 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-red">⚠️</div>
+      <div class="section-title">模块四：卡点与决策</div>
+    </div>
+
+    <div class="grid-3" style="margin-bottom:16px;">
+      <div class="risk-card warn">
+        <div class="risk-title" style="color:#b45309;">⚠️ 风险卡点</div>
+        <div class="risk-item">渠道端广告 CPS 合作意愿尚待明确，收入预期存在不确定性</div>
+        <div class="risk-item">自研游戏向 Web 端转制适配难度未知，研发进度需压实</div>
+        <div class="risk-item">自媒体内容产能仅达目标 50%，海外宣发储备落后</div>
+      </div>
+      <div class="risk-card action">
+        <div class="risk-title" style="color:#1d4ed8;">⚙️ 建议解决方案</div>
+        <div class="risk-item">下调广告 CPS 分成比例，让利广告收益，补贴硬件渠道</div>
+        <div class="risk-item">以让利换取更大用户规模，优先实现规模覆盖</div>
+      </div>
+      <div class="risk-card need">
+        <div class="risk-title" style="color:#7c3aed;">👥 需要协助</div>
+        <div class="risk-item">【需决策】是否让利硬件渠道换取纳晶云等快速准入</div>
+        <div class="risk-item">【需协同】调配开发资源攻克 Web 端转制底层架构</div>
+        <div class="risk-item">【需支持】启动海外新媒体实习生招聘，补充内容产能</div>
+      </div>
+    </div>
+
+    <!-- 风险雷达图 -->
+    <div class="card">
+      <div class="chart-title">🕸️ 风险维度评估</div>
+      <div class="chart-wrap" style="height:260px;">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 模块五：下周关键计划 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🚀</div>
+      <div class="section-title">模块五：下周关键计划</div>
+    </div>
+
+    <div class="grid-3">
+      <div class="plan-next">
+        <div class="plan-next-title">📡 渠道跟进 <span class="tag">关联 KR1</span></div>
+        <div class="plan-next-item">推进纳晶云-十米全量分发与内容联运合作方案</div>
+        <div class="plan-next-item">拜访建联 6 家厂商：叩鼎、优创亿、泰辑、佳祺、曼瑞德、爱都</div>
+        <div class="plan-next-item">与意向客户达成前期交流，了解痛点，寻找商机</div>
+        <div class="plan-next-item">建立 Poki 小游戏平台，对接广告 CPS 合作</div>
+      </div>
+      <div class="plan-next">
+        <div class="plan-next-title">⚙️ 精细运营 <span class="tag">关联 KR2</span></div>
+        <div class="plan-next-item">梳理当前接入游戏变现表现，下架低贡献游戏</div>
+        <div class="plan-next-item">Minigame 平台引入高质量游戏置换，丰富内容生态</div>
+        <div class="plan-next-item">优化游戏结构与曝光资源配置，提升广告整体曝光量</div>
+      </div>
+      <div class="plan-next">
+        <div class="plan-next-title">🎬 内容制作 <span class="tag">关联 KR3</span></div>
+        <div class="plan-next-item">建立全媒体矩阵：新增快手、B站、YouTube、INS、TikTok 账号</div>
+        <div class="plan-next-item">沉淀私域资产，实现粉丝 / 曝光量增长</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    对外合作组 · Q2W1 周度经营汇报 &nbsp;|&nbsp; 负责人：王潜 &nbsp;|&nbsp; 汇报周期：2026.03.27 — 04.02
+  </div>
+</div>
+
+<!-- ===== Charts ===== -->
+<script>
+// 1. 广告日收益 & 展示量
+(function() {
+  const ctx = document.getElementById('adChart').getContext('2d');
+  const labels = ['3/27', '3/28', '3/29', '3/30', '3/31', '4/1', '4/2'];
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          type: 'bar',
+          label: '展示量（次）',
+          data: [1994, 5205, 5100, 5300, 5250, 5400, 5350],
+          backgroundColor: 'rgba(59,130,246,0.18)',
+          borderColor: 'rgba(59,130,246,0.5)',
+          borderWidth: 1,
+          yAxisID: 'y1',
+          order: 2
+        },
+        {
+          type: 'line',
+          label: '日收益（$）',
+          data: [3.26, 6.81, 6.60, 6.75, 6.65, 6.80, 6.70],
+          borderColor: '#f59e0b',
+          backgroundColor: 'rgba(245,158,11,0.12)',
+          borderWidth: 2.5,
+          pointRadius: 5,
+          pointBackgroundColor: '#f59e0b',
+          tension: 0.35,
+          yAxisID: 'y',
+          order: 1,
+          fill: true
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', labels: { font: { size: 12 } } },
+        tooltip: { callbacks: {
+          label: function(ctx) {
+            if (ctx.dataset.label.includes('收益')) return ' 日收益：$' + ctx.parsed.y.toFixed(2);
+            return ' 展示量：' + ctx.parsed.y.toLocaleString() + ' 次';
+          }
+        }}
+      },
+      scales: {
+        y:  { type: 'linear', position: 'left',  title: { display: true, text: '日收益（$）' }, grid: { color: '#f3f4f6' } },
+        y1: { type: 'linear', position: 'right', title: { display: true, text: '展示量（次）' }, grid: { drawOnChartArea: false } }
+      }
+    }
+  });
+})();
+
+// 2. 内购平台收入变化对比
+(function() {
+  const ctx = document.getElementById('iapChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['纳晶云', '领为', '光速时代'],
+      datasets: [
+        {
+          label: '日活变化率（%）',
+          data: [-15.97, 0, 0],
+          backgroundColor: ['rgba(239,68,68,0.7)', 'rgba(34,197,94,0.7)', 'rgba(107,114,128,0.4)'],
+          borderRadius: 6
+        },
+        {
+          label: '收入变化率（%）',
+          data: [-22.03, 26.06, -8.90],
+          backgroundColor: ['rgba(239,68,68,0.4)', 'rgba(34,197,94,0.4)', 'rgba(239,68,68,0.25)'],
+          borderRadius: 6
+        },
+        {
+          label: '付费率变化率（%）',
+          data: [0, 26.17, -6.73],
+          backgroundColor: ['rgba(107,114,128,0.3)', 'rgba(59,130,246,0.5)', 'rgba(245,158,11,0.5)'],
+          borderRadius: 6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { font: { size: 11 } } },
+        tooltip: { callbacks: {
+          label: ctx => ' ' + ctx.dataset.label + '：' + ctx.parsed.y + '%'
+        }}
+      },
+      scales: {
+        y: {
+          grid: { color: '#f3f4f6' },
+          ticks: { callback: v => v + '%' }
+        }
+      }
+    }
+  });
+})();
+
+// 3. 风险雷达图
+(function() {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['商务合作风险', '技术研发风险', '内容产能风险', '渠道覆盖进度', 'OKR 完成度'],
+      datasets: [{
+        label: '当前风险评估',
+        data: [70, 60, 80, 40, 15],
+        backgroundColor: 'rgba(168,85,247,0.15)',
+        borderColor: '#a855f7',
+        borderWidth: 2,
+        pointBackgroundColor: '#a855f7',
+        pointRadius: 5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 20, font: { size: 11 } },
+          pointLabels: { font: { size: 12 } },
+          grid: { color: '#e5e7eb' },
+          angleLines: { color: '#e5e7eb' }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
